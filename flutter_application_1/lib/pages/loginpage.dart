@@ -5,7 +5,6 @@ import 'package:flutter_application_1/pages/forgotpasswordpage.dart';
 import 'package:flutter_application_1/pages/home.dart';
 import 'package:flutter_application_1/pages/signup.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class loginpage extends StatefulWidget {
   const loginpage({Key? key}) : super(key: key);
@@ -80,13 +79,6 @@ class _loginpageState extends State<loginpage> {
     } catch (error) {
       print(error);
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    FlutterNativeSplash.remove();
   }
 
   Widget build(BuildContext context) {

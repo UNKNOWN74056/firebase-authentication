@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/bottomnavigationpages/feed.dart';
+import 'package:flutter_application_1/bottomnavigationpages/homepage.dart';
+import 'package:flutter_application_1/bottomnavigationpages/setting.dart';
 import 'package:flutter_application_1/getdata/getdata.dart';
 import 'package:flutter_application_1/pages/loginpage.dart';
+import 'package:flutter_application_1/theme%20privider/changethemebutton.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class home extends StatefulWidget {
@@ -12,6 +16,12 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  int currentindex = 0;
+  final screen = const [
+    homepage(),
+    feed(),
+    setting(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +32,7 @@ class _homeState extends State<home> {
           child: ListView(
         children: [
           const DrawerHeader(
+            
             decoration: BoxDecoration(
               color: Colors.white,
             ),
@@ -29,9 +40,12 @@ class _homeState extends State<home> {
               decoration: BoxDecoration(color: Colors.white),
               accountName: Text(
                 "hamza",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
-              accountEmail: Text("hamza@gmail.com"),
+              accountEmail: Text(
+                "hamza@gmail.com",
+                style: TextStyle(color: Colors.black),
+              ),
               currentAccountPictureSize: Size.square(50),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -51,8 +65,14 @@ class _homeState extends State<home> {
             leading: Icon(Icons.wifi),
           ),
           const ListTile(
-              title: Text("Airplane"),
-              leading: Icon(Icons.airplanemode_active)),
+            title: Text("Airplane"),
+            leading: Icon(Icons.airplanemode_active),
+          ),
+          ListTile(
+            title: const Text("Theme"),
+            leading: const Icon(Icons.dark_mode),
+            trailing: changethemebutton(),
+          ),
           const ListTile(
             title: Text("Chats"),
             leading: Icon(Icons.chat),
@@ -78,28 +98,26 @@ class _homeState extends State<home> {
               }),
         ],
       )),
-      body: TextButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const getdata()));
-          },
-          child: const Text(
-            "GET DATA",
-            style: TextStyle(fontSize: 30),
-          )),
+      body: screen[currentindex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.green,
+        currentIndex: currentindex,
+        onTap: (index) => setState(() {
+          currentindex = index;
+        }),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.feed),
+            label: 'feed',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.settings),
+            label: 'Setting',
           ),
         ],
       ),

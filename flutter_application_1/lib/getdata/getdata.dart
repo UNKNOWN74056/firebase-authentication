@@ -26,9 +26,6 @@ class _getdataState extends State<getdata> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("DATA page"),
-      ),
       body: Center(
         child: FutureBuilder<List<User>>(
             future: usersFuture,
