@@ -3,6 +3,7 @@ import 'package:flutter_application_1/intropages/page1.dart';
 import 'package:flutter_application_1/intropages/page2.dart';
 import 'package:flutter_application_1/intropages/page3.dart';
 import 'package:flutter_application_1/pages/loginpage.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class introduction extends StatefulWidget {
@@ -48,10 +49,9 @@ class _introductionState extends State<introduction> {
                 islastpage
                     ? GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => const loginpage())));
+                          Navigator.of(context).push(PageTransition(
+                              type: PageTransitionType.fade,
+                              child: const loginpage()));
                         },
                         child: const Text("done"))
                     : GestureDetector(

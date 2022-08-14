@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/getdata/userdata.dart';
 import 'package:http/http.dart' as http;
-
 import 'user.dart';
 
 class getdata extends StatefulWidget {
@@ -57,6 +57,11 @@ class _getdataState extends State<getdata> {
             ),
             title: Text(user.username),
             subtitle: Text(user.email),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => userdata(user: user)),
+              ));
+            },
           ),
         );
       }));

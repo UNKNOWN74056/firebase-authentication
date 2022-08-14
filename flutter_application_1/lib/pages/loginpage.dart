@@ -5,6 +5,7 @@ import 'package:flutter_application_1/pages/forgotpasswordpage.dart';
 import 'package:flutter_application_1/pages/home.dart';
 import 'package:flutter_application_1/pages/signup.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:page_transition/page_transition.dart';
 
 class loginpage extends StatefulWidget {
   const loginpage({Key? key}) : super(key: key);
@@ -74,8 +75,8 @@ class _loginpageState extends State<loginpage> {
           accessToken: userData.accessToken, idToken: userData.idToken);
       var finalResult =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      Navigator.push(
-          context, MaterialPageRoute(builder: ((context) => const home())));
+      Navigator.of(context).push(
+          PageTransition(child: const home(), type: PageTransitionType.fade));
     } catch (error) {
       print(error);
     }
@@ -168,11 +169,11 @@ class _loginpageState extends State<loginpage> {
                                 Container(
                                   child: TextButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const forgotpasswordpage()));
+                                        Navigator.of(context).push(
+                                            PageTransition(
+                                                child:
+                                                    const forgotpasswordpage(),
+                                                type: PageTransitionType.fade));
                                       },
                                       child: const Text(
                                         "Forgot password",
@@ -181,11 +182,9 @@ class _loginpageState extends State<loginpage> {
                                 ),
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const signup()));
+                                      Navigator.of(context).push(PageTransition(
+                                          child: const signup(),
+                                          type: PageTransitionType.fade));
                                     },
                                     child: const Text(
                                       "SIGN UP",
