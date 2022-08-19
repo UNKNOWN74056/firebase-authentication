@@ -42,36 +42,65 @@ class _forgotpasswordpageState extends State<forgotpasswordpage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Forgot password"),
-      ),
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 25,
+    return Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/dw.jpg"), fit: BoxFit.cover)),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            child: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 120, left: 25),
+                  child: const Text(
+                    "Forgot \npassword",
+                    style: TextStyle(
+                      fontSize: 40,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.4,
+                      left: 35,
+                      right: 35),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              label: const Text("Email"),
+                              hintText: "Enter your email",
+                              prefixIcon: const Icon(Icons.person),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: double.infinity, height: 20),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.5,
+                      left: 120,
+                      right: 35),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        if (_formkey.currentState!.validate()) {
+                          setState(() {
+                            _email = _emailcontroller.text;
+                          });
+                          Rsetpassword();
+                        }
+                      },
+                      child: const Text("Send Email")),
+                )
+              ],
+            ),
           ),
-          TextFormField(
-            decoration: InputDecoration(
-                label: const Text("Email"),
-                hintText: "Enter your email",
-                prefixIcon: const Icon(Icons.person),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20))),
-          ),
-          const SizedBox(width: double.infinity, height: 20),
-          ElevatedButton(
-              onPressed: () {
-                if (_formkey.currentState!.validate()) {
-                  setState(() {
-                    _email = _emailcontroller.text;
-                  });
-                  Rsetpassword();
-                }
-              },
-              child: const Text("Send Email"))
-        ],
-      ),
-    );
+        ));
   }
 }

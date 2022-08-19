@@ -4,6 +4,7 @@ import 'package:flutter_application_1/aninmation/animation.dart';
 import 'package:flutter_application_1/pages/forgotpasswordpage.dart';
 import 'package:flutter_application_1/pages/home.dart';
 import 'package:flutter_application_1/pages/signup.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -86,21 +87,21 @@ class _loginpageState extends State<loginpage> {
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("images/ddd.jpg"), fit: BoxFit.cover)),
+              image: AssetImage("images/dw.jpg"), fit: BoxFit.cover)),
       child: Scaffold(
           backgroundColor: Colors.transparent,
           body: Form(
             key: _formkey,
-            child: Stack(
-              children: [
-                FadeAnimation(
-                    child: Container(
-                  padding: const EdgeInsets.only(top: 120, left: 25),
-                  child: const Text("WELCOME\n BACK",
-                      style: TextStyle(fontSize: 40, color: Colors.white)),
-                )),
-                FadeAnimation(
-                  child: SingleChildScrollView(
+            child: SingleChildScrollView(
+              child: Stack(
+                children: [
+                  FadeAnimation(
+                      child: Container(
+                    padding: const EdgeInsets.only(top: 120, left: 25),
+                    child: const Text("WELCOME\n BACK",
+                        style: TextStyle(fontSize: 40, color: Colors.white)),
+                  )),
+                  FadeAnimation(
                     child: Container(
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.4,
@@ -145,8 +146,25 @@ class _loginpageState extends State<loginpage> {
                                 return null;
                               }
                             }),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              child: TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(PageTransition(
+                                        child: const forgotpasswordpage(),
+                                        type: PageTransitionType.fade));
+                                  },
+                                  child: const Text(
+                                    "Forgot password",
+                                    style: TextStyle(fontSize: 15),
+                                  )),
+                            ),
+                          ],
+                        ),
                         const SizedBox(
-                          height: 25,
+                          height: 5,
                         ),
                         SizedBox(
                           width: double.infinity,
@@ -163,46 +181,39 @@ class _loginpageState extends State<loginpage> {
                               child: const Text("LOG IN")),
                         ),
                         Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Container(
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                            PageTransition(
-                                                child:
-                                                    const forgotpasswordpage(),
-                                                type: PageTransitionType.fade));
-                                      },
-                                      child: const Text(
-                                        "Forgot password",
-                                        style: TextStyle(fontSize: 15),
-                                      )),
-                                ),
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).push(PageTransition(
-                                          child: const signup(),
-                                          type: PageTransitionType.fade));
-                                    },
-                                    child: const Text(
-                                      "SIGN UP",
-                                      style: TextStyle(fontSize: 15),
-                                    )),
-                                TextButton(
-                                    onPressed: googleLogin,
-                                    child: const Text(
-                                      "Google",
-                                      style: TextStyle(fontSize: 15),
-                                    ))
-                              ],
-                            )),
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Row(
+                            children: [
+                              const Text("Dont have an account?"),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const signup()));
+                                  },
+                                  child: const Text(
+                                    "SIGN UP",
+                                    style: TextStyle(fontSize: 15),
+                                  )),
+                            ],
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                minimumSize: const Size(double.infinity, 40)),
+                            onPressed: () {
+                              googleLogin();
+                            },
+                            icon: const FaIcon(FontAwesomeIcons.google),
+                            label: const Text("Sign in with google")),
                       ]),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           )),
     );

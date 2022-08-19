@@ -45,6 +45,7 @@ dependencies:
   flutter_local_notifications: ^9.7.0
   provider: ^6.0.3
   page_transition: ^2.0.9
+  font_awesome_flutter: ^10.1.0
 
 dev_dependencies:
   flutter_test:
